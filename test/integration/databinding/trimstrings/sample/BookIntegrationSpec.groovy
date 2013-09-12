@@ -7,8 +7,11 @@ class BookIntegrationSpec extends Specification {
 
     @Unroll
     void "data binding"() {
-        given:
+        when:
         def book = new Book(title: title)
+
+        then:
+        book.title == converted
  
         when:
         book.validate()
@@ -16,15 +19,14 @@ class BookIntegrationSpec extends Specification {
         then:
         book.hasErrors() == invalid
         assertCause(book, "title", caused)
-        book.title == converted
 
         where:
-        title                | invalid | caused     | converted
-        "Programming Grails" | false   | null       | "Programming Grails"
-        " with spaces "      | false   | null       | "with spaces"
-        "   "                | true    | "nullable" | null
-        ""                   | true    | "nullable" | null
-        null                 | true    | "nullable" | null
+        title                | converted            | invalid | caused
+        "Programming Grails" | "Programming Grails" | false   | null
+        " with spaces "      | "with spaces"        | false   | null
+        "   "                | null                 | true    | "nullable"
+        ""                   | null                 | true    | "nullable"
+        null                 | null                 | true    | "nullable"
     }
 
     private void assertCause(book, property,  caused) {
