@@ -24,8 +24,10 @@ class BookIntegrationSpec extends Specification {
         title                | converted            | invalid | caused
         "Programming Grails" | "Programming Grails" | false   | null
         " with spaces "      | "with spaces"        | false   | null
-        "   "                | null                 | true    | "nullable"
-        ""                   | null                 | true    | "nullable"
+        //"   "                | null                 | true    | "nullable"
+        //""                   | null                 | true    | "nullable"
+        "   "                | ""                   | true    | "blank"
+        ""                   | ""                   | true    | "blank"
         null                 | null                 | true    | "nullable"
     }
 
