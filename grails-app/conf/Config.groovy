@@ -115,6 +115,6 @@ log4j = {
 }
 
 // for testing
-//grails.databinding.trimStrings = false
+grails.databinding.trimStrings = false
 grails.databinding.convertEmptyStringsToNull = false
 
